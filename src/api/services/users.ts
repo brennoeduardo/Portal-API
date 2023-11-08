@@ -13,7 +13,7 @@ class UsersServices {
         const { email, password } = login;
         const user = await this.findByEmail(email);
 
-        if (!user) throw new Error('User not found');
+        if (!user) throw new Error('User not found ');
 
         const isPasswordValid = bcrypt.compareSync(password, user.password);
         
