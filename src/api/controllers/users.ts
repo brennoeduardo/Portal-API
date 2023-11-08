@@ -1,12 +1,31 @@
 import { NextFunction, Request, Response } from "express";
-
 import UsersModel from "../models/users";
 import { UserAttributes } from "../interfaces/users";
 import UsersServices from "../services/users";
 
 class UsersController {
+
+    async login(req: Request, res: Response, next: NextFunction) {
+        try {
+            const login = req.body;
+            const user = await UsersServices.login(login);
+
+            res.json({
+                success: true,
+                message: 'User authenticated success',
+                data: user
+            });
+
+        } catch (error) {
+            next(error);
+            console.log(error);
+            
+        }
+    }
+
     async findAll(req: Request, res: Response, next: NextFunction) {
         try {
+
             const users = await UsersServices.findAll();
             res.json(
                 {
@@ -46,6 +65,7 @@ class UsersController {
 
     async create(req: Request, res: Response, next: NextFunction) {
         try {
+            console.log(req.body);
             const user: UserAttributes = req.body;
             const userCreated = await UsersServices.create(user);
             res.status(201).json({

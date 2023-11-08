@@ -7,6 +7,9 @@ router.route('/')
     .get(UsersController.findAll)
     .post(UsersController.create);
 
+router.route('/login')
+    .post(UsersController.login);
+
 router.route('/:id')
     .get(UsersController.findOne)
     .put(UsersController.update)

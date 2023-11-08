@@ -5,11 +5,12 @@ import { UserAttributes } from '../interfaces/users';
 
 
 class User extends Model<UserAttributes> implements UserAttributes {
-    public id!: number;
+    public id?: number;
     public name!: string;
     public last_name!: string;
     public email!: string;
     public password!: string;
+    public ativo!: boolean;
     public readonly created_at!: Date;
     public readonly updated_at!: Date;
 }
@@ -35,6 +36,11 @@ User.init({
     password: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    ativo: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true
     },
     created_at: { 
         type: DataTypes.DATE,
