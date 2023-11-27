@@ -10,16 +10,15 @@ class UsersController {
             const login = req.body;
             const user = await UsersServices.login(login);
 
-            res.json({
+            res.status(200).json({
                 success: true,
                 message: 'User authenticated success',
                 data: user
             });
 
         } catch (error) {
-            next(error);
             console.log(error);
-            
+            next(error);
         }
     }
 
