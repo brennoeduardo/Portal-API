@@ -3,7 +3,6 @@ import portal from '../../database/env';
 import bcrypt from 'bcrypt';
 import { UserAttributes } from '../interfaces/users';
 
-
 class User extends Model<UserAttributes> implements UserAttributes {
     public id?: number;
     public name!: string;
