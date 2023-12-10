@@ -2,9 +2,7 @@ import { Model, DataTypes } from 'sequelize';
 import portal from '../../database/env';
 import bcrypt from 'bcrypt';
 import { UserAttributes } from '../interfaces/users';
-
 class User extends Model<UserAttributes> implements UserAttributes {
-    public id?: number;
     public name!: string;
     public last_name!: string;
     public email!: string;
@@ -15,11 +13,6 @@ class User extends Model<UserAttributes> implements UserAttributes {
 }
 
 User.init({
-    id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
-    },
     name: {
         type: DataTypes.STRING,
         allowNull: false
@@ -41,22 +34,13 @@ User.init({
         allowNull: false,
         defaultValue: true
     },
-    created_at: { 
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW
-    },
-    updated_at: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW
-    }
 }, {
     sequelize: portal,
     tableName: 'users',
     timestamps: true,
     createdAt: 'created_at',
-    updatedAt: 'updated_at'
+    updatedAt: 'updated_at',
+    schema: 'usuarios'
 });
 
 User.beforeCreate(async (user: User) => {

@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import UsersModel from "../models/users";
 import { UserAttributes } from "../interfaces/users";
 import UsersServices from "../services/users";
 

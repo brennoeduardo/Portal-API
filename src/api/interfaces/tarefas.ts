@@ -1,5 +1,3 @@
-import { UserAttributes } from "./users";
-
 export interface TarefasAttributes {
     title: string,
     description: string,

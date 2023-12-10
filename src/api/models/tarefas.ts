@@ -1,19 +1,19 @@
 import { Model, DataTypes } from 'sequelize';
 import { TarefasAttributes } from '../interfaces/tarefas';
-import { UserAttributes } from '../interfaces/users';
 import portal from '../../database/env';
-import User from '../models/users'; // Import your User model
+import User from '../models/users'; // 
 
 class Tarefa extends Model<TarefasAttributes> implements TarefasAttributes {
   public title!: string;
   public description!: string;
-  public usuario_id!: number; // Use DataTypes.INTEGER for foreign keys
+  public usuario_id!: number; 
   public data_prazo!: Date;
   public data_fim?: Date;
+  public readonly created_at!: Date;
+  public readonly updated_at!: Date;
 }
 
-Tarefa.init(
-  {
+Tarefa.init({
     title: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -23,15 +23,15 @@ Tarefa.init(
       allowNull: false,
     },
     usuario_id: {
-      type: DataTypes.INTEGER, // Use INTEGER for foreign keys
+      type: DataTypes.INTEGER, 
       allowNull: false,
     },
     data_prazo: {
-      type: DataTypes.DATE, // Use DATE for date and time
+      type: DataTypes.DATE, 
       allowNull: false,
     },
     data_fim: {
-      type: DataTypes.DATE, // Use DATE for date and time
+      type: DataTypes.DATE,
       allowNull: true,
     },
   },
@@ -41,10 +41,11 @@ Tarefa.init(
     timestamps: true,
     createdAt: 'created_at',
     updatedAt: 'updated_at',
+    schema: 'tarefas'
   }
 );
 
 Tarefa.belongsTo(User, { foreignKey: 'usuario_id', as: 'user' });
-User.hasMany(Tarefa, { foreignKey: 'tarefa_id', as: 'tarefa'}) 
+User.hasMany(Tarefa, { foreignKey: 'usuario_id', as: 'tarefas' });
 
 export default Tarefa;
