@@ -17,7 +17,7 @@ class UsersServices {
         if (!user) throw new Error('Usuário não encontrado!');
 
         const isPasswordValid = bcrypt.compareSync(password, user.password);
-        
+
         if (!isPasswordValid) console.log('Invalid password');
 
         return user

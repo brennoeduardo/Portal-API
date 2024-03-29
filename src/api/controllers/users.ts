@@ -21,6 +21,13 @@ class UsersController {
         }
     }
 
+    async routerAuth(req: Request, res: Response, next: NextFunction){
+        res.status(200).json({
+            success: true,
+            message: 'Rota autenticada'
+        })
+    }
+
     async findAll(req: Request, res: Response, next: NextFunction) {
         try {
 

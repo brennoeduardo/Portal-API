@@ -46,7 +46,6 @@ class TarefasController {
 
     async create(req: Request, res: Response, next: NextFunction) {
         try {
-            console.log(req.body);
             const user: TarefasAttributes = req.body;
             const userCreated = await TarefasServices.create(user);
             res.status(201).json({

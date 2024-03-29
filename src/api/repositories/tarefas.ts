@@ -1,2 +1,2 @@
-import Tarefa from '../models/tarefas';
+import Tarefa from '../models/tarefa';
 

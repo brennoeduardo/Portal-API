@@ -9,7 +9,6 @@ app.use(cors());
 app.use(express.json());
 app.use(router);
 
-
 async function start() {
     try {
         await connect();

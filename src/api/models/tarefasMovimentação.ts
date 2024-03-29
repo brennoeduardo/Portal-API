@@ -1,7 +1,8 @@
 import { Model, DataTypes } from 'sequelize';
-import portal from '../../database/env';
+import portalT from '../../database/env';
 import { TarefaMovimentacaoAttributes } from '../interfaces/tarefasMovimentação'
 import User from './users';
+import Tarefas from './tarefa';
 
 class TarefaMovimentação extends Model<TarefaMovimentacaoAttributes> implements TarefaMovimentacaoAttributes {
     public data_inicio!: Date;
@@ -23,27 +24,31 @@ TarefaMovimentação.init({
         allowNull: true,
     },
     status_id:{
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: false
     },
     tarefa_id: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: false
     },
     usuario_id:{
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: false
     },
 },{
-    sequelize: portal,
+    sequelize: portalT,
     tableName: 'tarefa_movimentacao',
     timestamps: true,
     createdAt: 'created_at',
-    updatedAt: 'updated_at'
+    updatedAt: 'updated_at',
+    schema: 'tarefas' 
 })
 
+TarefaMovimentação.belongsTo(Tarefas, { foreignKey: 'tarefa_id', as: 'tarefa' });
+Tarefas.hasMany(TarefaMovimentação, { foreignKey: 'tarefa_id', as: 'tarefa' });
+
 TarefaMovimentação.belongsTo(User, { foreignKey: 'usuario_id', as: 'user' });
-User.hasMany(TarefaMovimentação, { foreignKey: 'usuario_id', as: 'tarefas' });
+User.hasMany(TarefaMovimentação, { foreignKey: 'usuario_id', as: 'user' });
 
 
 export default TarefaMovimentação;

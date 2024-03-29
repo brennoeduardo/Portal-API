@@ -1,5 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
-import portal from '../../database/env';
+import portalT from '../../database/env';
 import bcrypt from 'bcrypt';
 import { UserAttributes } from '../interfaces/users';
 class User extends Model<UserAttributes> implements UserAttributes {
@@ -34,8 +34,9 @@ User.init({
         allowNull: false,
         defaultValue: true
     },
-}, {
-    sequelize: portal,
+    },
+    {
+    sequelize: portalT,
     tableName: 'users',
     timestamps: true,
     createdAt: 'created_at',

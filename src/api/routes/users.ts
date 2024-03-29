@@ -1,5 +1,6 @@
 import {Router} from 'express';
 import UsersController from '../controllers/users';
+import AuthUser from '../middlewares/auth';
 
 const router = Router();
 
@@ -8,7 +9,10 @@ router.route('/')
     .post(UsersController.create);
 
 router.route('/login')
-    .post(UsersController.login);
+    .post(AuthUser.isUser);
+
+router.route('/routerAuth')
+    .post(AuthUser.verifyToken, )
 
 router.route('/:id')
     .get(UsersController.findOne)

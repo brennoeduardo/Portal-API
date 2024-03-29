@@ -1,5 +1,5 @@
 import { TarefasAttributes } from '../interfaces/tarefas';
-import Tarefa from '../models/tarefas';
+import Tarefa from '../models/tarefa';
 
 class TarefasServices {
 
